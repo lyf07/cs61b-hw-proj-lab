@@ -58,14 +58,39 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     public T removeFirst(){
-        T item = array[start];
+        if(isEmpty())
+        {
+            return null;
+        }
+        T item;
+        if(start == length - 1)
+        {
+            item = array[0];
+        }
+        else
+        {
+            item = array[start + 1];
+        }
         start++;
         return item;
+        //first we have to examine if there is any element in it
     }
 
     @Override
     public T removeLast(){
-        T item = array[last];
+        if(isEmpty())
+        {
+            return null;
+        }
+        T item;
+        if(last == 0)
+        {
+            item = array[length - 1];
+        }
+        else
+        {
+            item = array[last - 1];
+        }
         last--;
         return item;
     }
