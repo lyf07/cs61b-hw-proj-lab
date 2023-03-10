@@ -70,11 +70,6 @@ public class LinkedListDeque<T> implements Deque<T> {
         }
     }
 
-    @Override
-    public boolean isEmpty()
-    {
-        return sentinel.next == null;
-    }
 
     public int size(){return num;}
 

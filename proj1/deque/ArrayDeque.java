@@ -20,25 +20,46 @@ public class ArrayDeque<T> implements Deque<T>{
 
 
     //Don't rush to do it, do it when you've done everything else
-//    private void resize()
-//    {
-//
-//    }
+    private void resize()
+    {
+        //resize to more elements
+        int ori = length;
+        int tail = length - start - 1;
+        int head = last;
+        length *= 2;
+        T []temp = (T[]) new Object[length];
+        for(int i = 0; i  < tail; i++)
+        {
+            temp[length - 1 - i] = array[ori -1 - i];
+        }
+        for(int i = 0; i < head; i++)
+        {
+            temp[i] = array[i];
+        }
+        start = length - (ori - start);
+        array = temp;
+    }
     @Override
     public void addFirst(T item)
     {
+        if(size() + 1 > length)
+        {
+            resize();
+        }
         array[start] = item;
         start--;
     }
 
     @Override
     public void addLast(T item){
+        if(size() + 1 > length)
+        {
+            resize();
+        }
         array[last] = item;
         last++;
     }
 
-    @Override
-    public boolean isEmpty(){return size() == 0;}
 
     @Override
     public void printDeque(){
@@ -66,12 +87,17 @@ public class ArrayDeque<T> implements Deque<T>{
         if(start == length - 1)
         {
             item = array[0];
+            for(int i = 0; i < last - 1; i++)
+            {
+                array[i] = array[i + 1];
+            }
         }
         else
         {
             item = array[start + 1];
+            start++;
         }
-        start++;
+//        start++;
         return item;
         //first we have to examine if there is any element in it
     }
@@ -86,12 +112,16 @@ public class ArrayDeque<T> implements Deque<T>{
         if(last == 0)
         {
             item = array[length - 1];
+            for(int i = length - 1; i > start; i--)
+            {
+                array[i] = array[i - 1];
+            }
         }
         else
         {
             item = array[last - 1];
+            last--;
         }
-        last--;
         return item;
     }
 
