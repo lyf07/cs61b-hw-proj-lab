@@ -39,6 +39,7 @@ public class ArrayDeque<T> implements Deque<T>{
         start = length - (ori - start);
         array = temp;
     }
+
     @Override
     public void addFirst(T item)
     {
@@ -97,9 +98,7 @@ public class ArrayDeque<T> implements Deque<T>{
             item = array[start + 1];
             start++;
         }
-//        start++;
         return item;
-        //first we have to examine if there is any element in it
     }
 
     @Override
@@ -127,24 +126,6 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     public T get(int index){
-//        int rest = index;
-//
-//        if(rest < 0)
-//            return null;
-//        //we first look at the starting portion of this data structure
-//        if(rest > length - start - 1)
-//        {
-//            rest -= length - start - 1;
-//        }
-//        else
-//        {
-//            return array[start + rest + 1];
-//        }
-//        if(rest < last)
-//        {
-//            return array[rest];
-//        }
-//        return null;
         if(index < 0 || index >= length - start + last - 1)
         {
             return null;
