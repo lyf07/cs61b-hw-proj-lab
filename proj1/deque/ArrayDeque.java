@@ -96,11 +96,11 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         }
         T item;
         if (start == length - 1) {
-            last--;
             item = array[0];
             for (int i = 0; i < last - 1; i++) {
                 array[i] = array[i + 1];
             }
+            last--;
         }
         else
         {
@@ -117,11 +117,11 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         }
         T item;
         if (last == 0) {
-            start++;
             item = array[length - 1];
             for (int i = length - 1; i > start; i--) {
                 array[i] = array[i - 1];
             }
+            start++;
         }
         else
         {
