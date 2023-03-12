@@ -1,5 +1,6 @@
 package deque;
 
+import org.checkerframework.checker.units.qual.A;
 import org.junit.Test;
 import static org.junit.Assert.*;
 public class ArrayDequeTest {
@@ -132,7 +133,17 @@ public class ArrayDequeTest {
         for (double i = 999999; i > 500000; i--) {
             assertEquals("Should have the same value", i, (double) lld1.removeLast(), 0.0);
         }
+    }
 
 
+    @Test
+    public void randomRemove(){
+        ArrayDeque<Integer> a = new ArrayDeque<Integer>();
+        a.addLast(0);
+        assertEquals(a.removeFirst()==0.0,true);
+        a.addLast(2);
+        a.addLast(3);
+        a.addLast(4);
+        assertEquals(a.removeFirst()==2.0,true);
     }
 }

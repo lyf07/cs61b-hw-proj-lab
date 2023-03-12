@@ -96,6 +96,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         }
         T item;
         if (start == length - 1) {
+            last--;
             item = array[0];
             for (int i = 0; i < last - 1; i++) {
                 array[i] = array[i + 1];
@@ -116,6 +117,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
         }
         T item;
         if (last == 0) {
+            start++;
             item = array[length - 1];
             for (int i = length - 1; i > start; i--) {
                 array[i] = array[i - 1];
@@ -153,15 +155,14 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
 
     @Override
     public boolean equals(Object o){
-        if (o instanceof ArrayDeque){
-            ArrayDeque<T> o1 = (ArrayDeque<T>) o;
-            if (o1.size() == this.size()){
-                Iterator<T> temp = this.iterator();
-                for (T i : o1){
-                    if (i != temp.next()){
+        if (o instanceof Deque){
+            if(((Deque<?>) o).size() == this.size()){
+                for (int i = 0; this.get(i) != null; i += 1){
+                    if(((Deque<?>) o).get(i) != this.get(i)){
                         return false;
                     }
                 }
+                return true;
             }
         }
         return false;
