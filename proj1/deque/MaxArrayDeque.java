@@ -25,7 +25,7 @@ public class MaxArrayDeque<T> extends ArrayDeque<T>{
             {
                 break;
             }
-            if(com.compare(max,temp) > 0)
+            if(com.compare(max,temp) < 0)
             {
                 max = temp;
             }
@@ -47,7 +47,7 @@ public class MaxArrayDeque<T> extends ArrayDeque<T>{
             {
                 break;
             }
-            if(c.compare(max,temp) > 0)
+            if(c.compare(max,temp) < 0)
             {
                 max = temp;
             }

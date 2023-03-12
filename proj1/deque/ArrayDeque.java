@@ -1,6 +1,23 @@
 package deque;
+import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T>{
+public class ArrayDeque<T> implements Deque<T>, Iterable<T>{
+    private class MyIterator implements Iterator<T>{
+        private int pos;
+        public MyIterator(){
+            pos = 0;
+        }
+
+        public boolean hasNext(){
+            return pos < size();
+        }
+
+        public T next(){
+            T ans = get(pos);
+            pos += 1;
+            return ans;
+        }
+    }
 
     private int length;
     private T []array;
@@ -28,12 +45,10 @@ public class ArrayDeque<T> implements Deque<T>{
         int head = last;
         length *= 2;
         T []temp = (T[]) new Object[length];
-        for(int i = 0; i  < tail; i++)
-        {
-            temp[length - 1 - i] = array[ori -1 - i];
+        for (int i = 0; i  < tail; i++) {
+            temp[length - 1 - i] = array[ori - 1 - i];
         }
-        for(int i = 0; i < head; i++)
-        {
+        for (int i = 0; i < head; i++) {
             temp[i] = array[i];
         }
         start = length - (ori - start);
@@ -43,8 +58,7 @@ public class ArrayDeque<T> implements Deque<T>{
     @Override
     public void addFirst(T item)
     {
-        if(size() + 1 > length)
-        {
+        if (size() + 1 > length) {
             resize();
         }
         array[start] = item;
@@ -53,8 +67,7 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     public void addLast(T item){
-        if(size() + 1 > length)
-        {
+        if (size() + 1 > length) {
             resize();
         }
         array[last] = item;
@@ -65,14 +78,12 @@ public class ArrayDeque<T> implements Deque<T>{
     @Override
     public void printDeque(){
         //print from start,to the end
-        for(int i = start; i < length; i++)
-        {
+        for (int i = start; i < length; i++) {
             System.out.print(array[i] + " ");
         }
 
         //print from beginning, to the last
-        for(int i = 0; i <= last; i++)
-        {
+        for (int i = 0; i <= last; i++) {
             System.out.print(array[i] + " ");
         }
         System.out.println();
@@ -80,16 +91,13 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     public T removeFirst(){
-        if(isEmpty())
-        {
+        if (isEmpty()) {
             return null;
         }
         T item;
-        if(start == length - 1)
-        {
+        if (start == length - 1) {
             item = array[0];
-            for(int i = 0; i < last - 1; i++)
-            {
+            for (int i = 0; i < last - 1; i++) {
                 array[i] = array[i + 1];
             }
         }
@@ -103,16 +111,13 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     public T removeLast(){
-        if(isEmpty())
-        {
+        if (isEmpty()) {
             return null;
         }
         T item;
-        if(last == 0)
-        {
+        if (last == 0) {
             item = array[length - 1];
-            for(int i = length - 1; i > start; i--)
-            {
+            for (int i = length - 1; i > start; i--) {
                 array[i] = array[i - 1];
             }
         }
@@ -126,8 +131,7 @@ public class ArrayDeque<T> implements Deque<T>{
 
     @Override
     public T get(int index){
-        if(index < 0 || index >= length - start + last - 1)
-        {
+        if (index < 0 || index >= length - start + last - 1) {
             return null;
         }
         return array[(start + index + 1) % length];
@@ -140,5 +144,26 @@ public class ArrayDeque<T> implements Deque<T>{
         int tail = length - start -1;
         int head = last;
         return tail + head;
+    }
+
+    @Override
+    public Iterator<T> iterator(){
+        return new MyIterator();
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if (o instanceof ArrayDeque){
+            ArrayDeque<T> o1 = (ArrayDeque<T>) o;
+            if (o1.size() == this.size()){
+                Iterator<T> temp = this.iterator();
+                for (T i : o1){
+                    if (i != temp.next()){
+                        return false;
+                    }
+                }
+            }
+        }
+        return false;
     }
 }
