@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.Iterator;
 import java.util.TreeMap;
 
-public class BSTMap<K extends Comparable,V> implements  Map61B<K,V>{
+public class BSTMap<K extends Comparable<K>,V> implements  Map61B<K,V>{
 
     private class BSTNode{
         private V value;
@@ -17,8 +17,12 @@ public class BSTMap<K extends Comparable,V> implements  Map61B<K,V>{
     }
 
     private BSTNode root;
-    public BSTMap left;
-    public BSTMap right;
+    private BSTMap left;
+    private BSTMap right;
+
+    private void printInOrder(){
+        return;
+    }
 
     public BSTMap(){
         root = null;
