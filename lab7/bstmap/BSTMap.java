@@ -41,7 +41,7 @@ public class BSTMap<K extends Comparable<K>,V> implements  Map61B<K,V>{
         {
             return false;
         }
-        int com = key.compareTo(tree.root.key);
+        int com = key.compareTo((K)tree.root.key);
         if(com > 0){
             return helperContains(tree.right,key);
         }
@@ -59,7 +59,7 @@ public class BSTMap<K extends Comparable<K>,V> implements  Map61B<K,V>{
         {
             return null;
         }
-        int com = key.compareTo(tree.root.key);
+        int com = key.compareTo((K)tree.root.key);
         if(com > 0){
             return helperGet(tree.right,key);
         }
@@ -104,7 +104,7 @@ public class BSTMap<K extends Comparable<K>,V> implements  Map61B<K,V>{
             tree.root = new BSTNode(value,key);
         }
         else{
-            int com = key.compareTo(tree.root.key);
+            int com = key.compareTo((K)tree.root.key);
             if(com > 0){
                 tree.right = helperPut(tree.right,key,value);
             }
