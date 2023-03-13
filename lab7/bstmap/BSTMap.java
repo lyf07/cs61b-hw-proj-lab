@@ -20,7 +20,7 @@ public class BSTMap<K extends Comparable<K>,V> implements  Map61B<K,V>{
     private BSTMap left;
     private BSTMap right;
 
-    private void printInOrder(){
+    public void printInOrder(){
         return;
     }
 
